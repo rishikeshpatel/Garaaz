@@ -1,4 +1,5 @@
 // Users mock data
+// If you update the below mocked data, please make sure each object has unique ID, same ID can result in multiple list selections.
 export const users = [
   {
     id: 'BB_38524128039',

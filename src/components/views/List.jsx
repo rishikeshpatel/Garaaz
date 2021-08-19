@@ -1,4 +1,4 @@
-function UserList(props) {
+function List(props) {
   const { id, name, address, pincode } = props.data;
   // Returns matching string with wrapped in <span/> tag to show them in blue color
   const getMatchingString = (param) => {
@@ -58,4 +58,4 @@ function UserList(props) {
     </div>
   );
 }
-export default UserList;
+export default List;

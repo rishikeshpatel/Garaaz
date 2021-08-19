@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import Header from './components/Header';
-import UserFilter from './components/UserFilter';
+import Header from './components/header/Header';
+import UserFilter from './components/user-filter/UserFilter';
 import { appConstant } from './healper';
 import { connect } from 'react-redux';
 import {

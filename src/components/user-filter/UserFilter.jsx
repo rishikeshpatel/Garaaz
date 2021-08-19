@@ -1,4 +1,4 @@
-import SearchBar from './SearchBar';
+import SearchBar from '../views/SearchBar';
 import UserList from './UserList';
 
 function UserFilter(props) {

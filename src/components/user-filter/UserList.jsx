@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
-import List from './List';
-import NoResultCard from './NoResultCard';
-import { appConstant } from '../healper';
+import List from '../views/List';
+import NoResultCard from '../views/NoResultCard';
+import { appConstant } from '../../healper';
 function UserList(props) {
   const { onMouseMove } = props;
   const userList = useSelector((state) => state.filteredList);

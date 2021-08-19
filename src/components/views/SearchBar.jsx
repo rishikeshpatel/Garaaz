@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { FaSearch } from 'react-icons/fa';
 import { MdClear } from 'react-icons/md';
-import { appConstant } from '../healper';
+import { appConstant } from '../../healper';
 function SearchBar(props) {
   const { handleSearch, clearSearch } = props;
   const searchQuery = useSelector((state) => state.searchQuery);
