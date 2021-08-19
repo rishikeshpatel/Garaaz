@@ -3,16 +3,21 @@ import './App.css';
 import Header from './components/Header';
 import UserFilter from './components/UserFilter';
 import { user, appConstant } from './healper';
+import { connect } from 'react-redux';
+import {
+  onUserSearch,
+  updateSearchQuery,
+  updateFilterList,
+  updateSelectionList,
+  updateCurrentSelection,
+  resetFilter,
+} from './action/action';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filteredList: [],
-      selectionList: [],
-      searchQuery: '',
       timer: 1,
-      currentSelection: -1,
     };
   }
 
@@ -28,25 +33,25 @@ class App extends React.Component {
   }
   // on change of selected search result with arrow key up/down
   arrowKeyPress = (e) => {
-    const { selectionList, currentSelection } = this.state;
+    const { selectionList, currentSelection } = this.props;
     let nextId = appConstant.EMPTY_TEXT;
     switch (e) {
       case 40:
         if (!selectionList[currentSelection] || currentSelection === selectionList.length - 1) {
           nextId = Object.keys(selectionList[0])[0];
-          this.updateSelectionList(Object.keys(selectionList[0])[0]);
+          this.updateSelection(Object.keys(selectionList[0])[0]);
         } else if (currentSelection < selectionList.length - 1) {
           nextId = Object.keys(selectionList[currentSelection + 1])[0];
-          this.updateSelectionList(Object.keys(selectionList[currentSelection + 1])[0]);
+          this.updateSelection(Object.keys(selectionList[currentSelection + 1])[0]);
         }
         break;
       case 38:
         if (!selectionList[currentSelection] || currentSelection === 0) {
           nextId = Object.keys(selectionList[selectionList.length - 1])[0];
-          this.updateSelectionList(Object.keys(selectionList[selectionList.length - 1])[0]);
+          this.updateSelection(Object.keys(selectionList[selectionList.length - 1])[0]);
         } else if (currentSelection > 0) {
           nextId = Object.keys(selectionList[currentSelection - 1])[0];
-          this.updateSelectionList(Object.keys(selectionList[currentSelection - 1])[0]);
+          this.updateSelection(Object.keys(selectionList[currentSelection - 1])[0]);
         }
         break;
       default:
@@ -61,21 +66,17 @@ class App extends React.Component {
   };
   // When mouse moves on search list, updating list selection
   onMouseMove = (id) => {
-    this.updateSelectionList(id);
+    this.updateSelection(id);
   };
   // On search of user list
   handleSearch = (e) => {
     const { timer } = this.state;
+    const { updateSearchQuery, resetFilter } = this.props;
     let query = e.target.value;
-    this.setState({
-      searchQuery: query,
-    });
-
+    updateSearchQuery(query);
     window.clearTimeout(timer);
     if (query.trim().length <= 2) {
-      this.setState({
-        filteredList: [],
-      });
+      resetFilter();
     }
     this.setState({
       timer: setTimeout(() => {
@@ -87,13 +88,13 @@ class App extends React.Component {
   };
   // Clear the search query
   clearSearch = () => {
-    this.setState({
-      searchQuery: appConstant.EMPTY_TEXT,
-      filteredList: [],
-    });
+    const { updateSearchQuery, resetFilter } = this.props;
+    updateSearchQuery(appConstant.EMPTY_TEXT);
+    resetFilter();
   };
   //  Filter user list based on iput search query
   filteredUserList = (query) => {
+    const { updateFilterList, updateSelectionList } = this.props;
     let filteredList = [];
     let selectionList = [];
     user.map((data, index) => {
@@ -104,17 +105,15 @@ class App extends React.Component {
       }
       return null;
     });
-    this.setState({
-      filteredList,
-      selectionList,
-    });
+    updateFilterList(filteredList);
+    updateSelectionList(selectionList);
   };
   //  Updated selected list based on mouse/keyboard input
-  updateSelectionList = (id) => {
-    const { currentSelection } = this.state;
-    var tempArray = JSON.parse(JSON.stringify(this.state.selectionList));
+  updateSelection = (id) => {
+    const { currentSelection, updateSelectionList, updateCurrentSelection, selectionList } = this.props;
+    var tempArray = JSON.parse(JSON.stringify(selectionList));
     let cs = -1;
-    if (currentSelection !== -1 && Object.keys(tempArray[this.state.currentSelection])[0] === id) return;
+    if (currentSelection !== -1 && Object.keys(tempArray[currentSelection])[0] === id) return;
     if (!id) {
       tempArray.map((key) => {
         let element = document.getElementById(Object.keys(key)[0]);
@@ -136,27 +135,30 @@ class App extends React.Component {
         return null;
       });
     }
-    this.setState({
-      selectionList: tempArray,
-      currentSelection: cs,
-    });
+    updateSelectionList(tempArray);
+    updateCurrentSelection(cs);
   };
   render() {
-    const { filteredList, searchQuery, selectionList } = this.state;
     return (
       <div className='App'>
         <Header title={appConstant.APP_NAME} />
-        <UserFilter
-          data={filteredList}
-          searchQuery={searchQuery}
-          selectionList={selectionList}
-          clearSearch={this.clearSearch}
-          handleSearch={this.handleSearch}
-          onMouseMove={this.onMouseMove}
-        />
+        <UserFilter clearSearch={this.clearSearch} handleSearch={this.handleSearch} onMouseMove={this.onMouseMove} />
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  ...state,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onUserSearch: () => dispatch(onUserSearch()),
+  updateSearchQuery: (searchQuery) => dispatch(updateSearchQuery(searchQuery)),
+  updateFilterList: (userList) => dispatch(updateFilterList(userList)),
+  updateSelectionList: (selectionList) => dispatch(updateSelectionList(selectionList)),
+  updateCurrentSelection: (id) => dispatch(updateCurrentSelection(id)),
+  resetFilter: () => dispatch(resetFilter()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

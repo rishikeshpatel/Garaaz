@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { FaSearch } from 'react-icons/fa';
 import { MdClear } from 'react-icons/md';
 import { appConstant } from '../healper';
 function SearchBar(props) {
-  const { searchQuery, handleSearch, clearSearch } = props;
+  const { handleSearch, clearSearch } = props;
+  const searchQuery = useSelector((state) => state.searchQuery);
   // Disable keyboard event of arrow key up/down, *to be used for list selection
   useEffect(() => {
     document.getElementById('search-input').addEventListener('keydown', function (e) {
