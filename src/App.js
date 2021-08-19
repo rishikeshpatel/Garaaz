@@ -2,10 +2,10 @@ import React from 'react';
 import './App.css';
 import Header from './components/Header';
 import UserFilter from './components/UserFilter';
-import { user, appConstant } from './healper';
+import { appConstant } from './healper';
 import { connect } from 'react-redux';
 import {
-  onUserSearch,
+  getUsers,
   updateSearchQuery,
   updateFilterList,
   updateSelectionList,
@@ -23,6 +23,7 @@ class App extends React.Component {
 
   // Listening for arrow key event to move up/down search result
   componentDidMount() {
+    const { getUsers } = this.props;
     let context = this;
     document.addEventListener(appConstant.KEYDOWN, function (e) {
       if (e.keyCode === 38 || e.keyCode === 40) {
@@ -30,6 +31,8 @@ class App extends React.Component {
         context.arrowKeyPress(e.keyCode);
       }
     });
+    // Use below function to get user through API
+    // getUsers()
   }
   // on change of selected search result with arrow key up/down
   arrowKeyPress = (e) => {
@@ -94,10 +97,10 @@ class App extends React.Component {
   };
   //  Filter user list based on iput search query
   filteredUserList = (query) => {
-    const { updateFilterList, updateSelectionList } = this.props;
+    const { users, updateFilterList, updateSelectionList } = this.props;
     let filteredList = [];
     let selectionList = [];
-    user.map((data, index) => {
+    users.map((data, index) => {
       let tempStr = data.id + ' ' + data.name + ' ' + data.address;
       if (tempStr.toLowerCase().includes(query.toLowerCase())) {
         selectionList.push({ [data.id]: false });
@@ -153,7 +156,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onUserSearch: () => dispatch(onUserSearch()),
+  getUsers: () => dispatch(getUsers()),
   updateSearchQuery: (searchQuery) => dispatch(updateSearchQuery(searchQuery)),
   updateFilterList: (userList) => dispatch(updateFilterList(userList)),
   updateSelectionList: (selectionList) => dispatch(updateSelectionList(selectionList)),

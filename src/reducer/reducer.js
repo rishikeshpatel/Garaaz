@@ -1,6 +1,8 @@
 import { userFilterActionTypes } from '../action/actionType';
+import { users } from '../mocks/user';
 
 const initialState = {
+  users: users,
   filteredList: [],
   selectionList: [],
   searchQuery: '',

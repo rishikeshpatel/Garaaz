@@ -1,9 +1,9 @@
 import { userFilterActionTypes } from './actionType';
 // import axios from 'axios';
 
-export const onUserSearch = () => {
+export const getUsers = () => {
   return (dispatch) => {
-    // Axios calls can be made here
+    // Axios call can be made here to get users data
   };
 };
 
