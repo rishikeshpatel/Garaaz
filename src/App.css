@@ -53,6 +53,7 @@
 .list {
   text-align: left;
   padding: 2rem;
+  cursor: pointer;
 }
 .active-list {
   background-color: #f3edc2;
@@ -60,6 +61,9 @@
 .list span {
   color: rgb(75, 75, 230);
   font-weight: 700;
+}
+.list label {
+  cursor: pointer;
 }
 .id {
   font-size: x-large;
