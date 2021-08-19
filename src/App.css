@@ -2,11 +2,6 @@
   text-align: center;
 }
 
-/* Header Stylings */
-
-/* .title-container {
-} */
-
 /*  User List css */
 .user-list {
   position: absolute;
@@ -19,12 +14,16 @@
   box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 20%);
   z-index: 1;
 }
+
+/* No result card */
 .no-result-card {
   min-height: 15rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+/* Search bar */
 .user-search {
   display: flex;
   justify-content: center;
@@ -36,7 +35,6 @@
   border: 1px solid gray;
   padding: 0.5rem 0rem 0.5rem 0rem;
 }
-
 .search-box input {
   border: none;
   padding: 0rem 1rem 0rem 1rem;
@@ -45,17 +43,19 @@
 .search-box input:focus-visible {
   outline: none;
 }
+.search-icon,
+.clear-search {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+/* List view styling */
 .list {
   text-align: left;
   padding: 2rem;
 }
 .active-list {
   background-color: #f3edc2;
-}
-.search-icon,
-.clear-search {
-  padding: 0.5rem;
-  cursor: pointer;
 }
 .list span {
   color: rgb(75, 75, 230);

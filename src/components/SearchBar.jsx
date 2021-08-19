@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { MdClear } from 'react-icons/md';
+import { appConstant } from '../healper';
 function SearchBar(props) {
   const { searchQuery, handleSearch, clearSearch } = props;
 
@@ -21,7 +22,7 @@ function SearchBar(props) {
           id={'search-input'}
           type='text'
           value={searchQuery}
-          placeholder='Search user by ID, address, name'
+          placeholder={appConstant.SEARCH_PLACEHOLDER}
           onChange={(e) => handleSearch(e)}
         />
         <div className='clear-search'>

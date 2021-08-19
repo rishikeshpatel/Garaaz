@@ -28,3 +28,11 @@ export const user = [
     pincode: '45621',
   },
 ];
+
+export const appConstant = {
+  APP_NAME: 'Garaaz',
+  KEYDOWN: 'keydown',
+  EMPTY_TEXT: '',
+  SEARCH_PLACEHOLDER: 'Search user by ID, address, name',
+  NO_USER_FOUND: 'No User Found',
+};

@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Header from './components/Header';
 import UserFilter from './components/UserFilter';
-import { user } from './healper';
+import { user, appConstant } from './healper';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class App extends React.Component {
   }
   componentDidMount() {
     let context = this;
-    document.addEventListener('keydown', function (e) {
+    document.addEventListener(appConstant.KEYDOWN, function (e) {
       if (e.keyCode === 38 || e.keyCode === 40) {
         e.preventDefault();
         context.arrowKeyPress(e.keyCode);
@@ -26,7 +26,7 @@ class App extends React.Component {
   }
   arrowKeyPress = (e) => {
     const { selectionList, currentSelection } = this.state;
-    let nextId = '';
+    let nextId = appConstant.EMPTY_TEXT;
     switch (e) {
       case 40:
         if (!selectionList[currentSelection] || currentSelection === selectionList.length - 1) {
@@ -81,7 +81,7 @@ class App extends React.Component {
   };
   clearSearch = () => {
     this.setState({
-      searchQuery: '',
+      searchQuery: appConstant.EMPTY_TEXT,
       filteredList: [],
     });
   };
@@ -136,7 +136,7 @@ class App extends React.Component {
     const { filteredList, searchQuery, selectionList } = this.state;
     return (
       <div className='App'>
-        <Header title='Garaaz' />
+        <Header title={appConstant.APP_NAME} />
         <UserFilter
           data={filteredList}
           searchQuery={searchQuery}
