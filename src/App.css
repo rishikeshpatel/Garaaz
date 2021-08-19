@@ -1,3 +1,75 @@
 .App {
   text-align: center;
 }
+
+/* Header Stylings */
+
+/* .title-container {
+} */
+
+/*  User List css */
+.user-list {
+  position: absolute;
+  width: 70%;
+  right: 10%;
+  left: 15%;
+  overflow-y: auto;
+  max-height: 500px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 20%);
+  z-index: 1;
+}
+.no-result-card {
+  min-height: 15rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.user-search {
+  display: flex;
+  justify-content: center;
+}
+.search-box {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid gray;
+  padding: 0.5rem 0rem 0.5rem 0rem;
+}
+
+.search-box input {
+  border: none;
+  padding: 0rem 1rem 0rem 1rem;
+  width: 90%;
+}
+.search-box input:focus-visible {
+  outline: none;
+}
+.list {
+  text-align: left;
+  padding: 2rem;
+}
+.active-list {
+  background-color: #f3edc2;
+}
+.search-icon,
+.clear-search {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+.list span {
+  color: rgb(75, 75, 230);
+  font-weight: 700;
+}
+.id {
+  font-size: x-large;
+  font-weight: 700;
+}
+.name {
+  font-size: larger;
+  font-style: italic;
+  color: #575454;
+}
+.address {
+  margin-top: 1rem;
+}
