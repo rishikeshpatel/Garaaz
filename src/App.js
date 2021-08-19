@@ -23,7 +23,6 @@ class App extends React.Component {
 
   // Listening for arrow key event to move up/down search result
   componentDidMount() {
-    const { getUsers } = this.props;
     let context = this;
     document.addEventListener(appConstant.KEYDOWN, function (e) {
       if (e.keyCode === 38 || e.keyCode === 40) {
@@ -32,7 +31,7 @@ class App extends React.Component {
       }
     });
     // Use below function to get user through API
-    // getUsers()
+    // this.props.getUsers()
   }
   // on change of selected search result with arrow key up/down
   arrowKeyPress = (e) => {
