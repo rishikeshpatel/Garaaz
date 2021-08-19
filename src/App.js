@@ -15,6 +15,8 @@ class App extends React.Component {
       currentSelection: -1,
     };
   }
+
+  // Listening for arrow key event to move up/down search result
   componentDidMount() {
     let context = this;
     document.addEventListener(appConstant.KEYDOWN, function (e) {
@@ -24,6 +26,7 @@ class App extends React.Component {
       }
     });
   }
+  // on change of selected search result with arrow key up/down
   arrowKeyPress = (e) => {
     const { selectionList, currentSelection } = this.state;
     let nextId = appConstant.EMPTY_TEXT;
@@ -51,13 +54,16 @@ class App extends React.Component {
     }
     this.updateScrollPosition(nextId);
   };
+  // Keeping selected list in view
   updateScrollPosition = (id) => {
     let elmnt = document.getElementById(id);
     elmnt.scrollIntoView();
   };
+  // When mouse moves on search list, updating list selection
   onMouseMove = (id) => {
     this.updateSelectionList(id);
   };
+  // On search of user list
   handleSearch = (e) => {
     const { timer } = this.state;
     let query = e.target.value;
@@ -79,12 +85,14 @@ class App extends React.Component {
       }, 500),
     });
   };
+  // Clear the search query
   clearSearch = () => {
     this.setState({
       searchQuery: appConstant.EMPTY_TEXT,
       filteredList: [],
     });
   };
+  //  Filter user list based on iput search query
   filteredUserList = (query) => {
     let filteredList = [];
     let selectionList = [];
@@ -101,6 +109,7 @@ class App extends React.Component {
       selectionList,
     });
   };
+  //  Updated selected list based on mouse/keyboard input
   updateSelectionList = (id) => {
     const { currentSelection } = this.state;
     var tempArray = JSON.parse(JSON.stringify(this.state.selectionList));

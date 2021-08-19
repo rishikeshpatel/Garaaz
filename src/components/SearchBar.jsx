@@ -4,7 +4,7 @@ import { MdClear } from 'react-icons/md';
 import { appConstant } from '../healper';
 function SearchBar(props) {
   const { searchQuery, handleSearch, clearSearch } = props;
-
+  // Disable keyboard event of arrow key up/down, *to be used for list selection
   useEffect(() => {
     document.getElementById('search-input').addEventListener('keydown', function (e) {
       if (e.keyCode === 38 || e.keyCode === 40) {

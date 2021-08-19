@@ -1,5 +1,6 @@
 function UserList(props) {
   const { id, name, address, pincode } = props.data;
+  // Returns matching string with wrapped in <span/> tag to show them in blue color
   const getMatchingString = (param) => {
     const { searchQuery } = props;
     let tempJSX = [];
